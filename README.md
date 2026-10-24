@@ -60,6 +60,7 @@ Local edits do not deploy the site automatically.
 ## Link previews
 
 Open Graph and large-image card metadata live in `index.html`. Both reference
-`public/images/og-hero.jpg`, a 1200 × 630 screenshot of the live desktop hero
-captured on October 24, 2026, after its entrance animations settled. Recapture
+`public/images/og-hero-intro.jpg`, a 1440 × 756 screenshot of the desktop hero
+captured on October 24, 2026, after its entrance animations settled, including
+the full introduction below the headline. Recapture
 the image when the hero changes; it is a static image rather than a live render.

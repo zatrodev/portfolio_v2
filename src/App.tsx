@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
-  ArrowDown,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
@@ -422,7 +421,10 @@ function ProjectGallery({
   }
 
   return (
-    <section className="project-screenshots" aria-labelledby="screenshots-title">
+    <section
+      className="project-screenshots"
+      aria-labelledby="screenshots-title"
+    >
       <div className="gallery-heading">
         <h3 id="screenshots-title">App screenshots</h3>
         <div className="gallery-controls">
@@ -464,7 +466,11 @@ function ProjectGallery({
           const figures = Array.from(element.children) as HTMLElement[];
           let nearest = 0;
           const distance = (index: number) =>
-            Math.abs(figures[index].offsetLeft - figures[0].offsetLeft - element.scrollLeft);
+            Math.abs(
+              figures[index].offsetLeft -
+                figures[0].offsetLeft -
+                element.scrollLeft,
+            );
           figures.forEach((_, index) => {
             if (distance(index) < distance(nearest)) nearest = index;
           });
@@ -604,7 +610,7 @@ function App() {
           ease: "power4.out",
           delay: 0.12,
         });
-        gsap.from(".hero-intro, .hero-bottom", {
+        gsap.from(".hero-intro", {
           y: 20,
           opacity: 0,
           duration: 0.9,
@@ -812,18 +818,6 @@ function App() {
               <span className="hero-current">Currently leading Kubo.</span>
             </p>
           </div>
-          <div className="hero-bottom">
-            <a href="#work" className="scroll-link">
-              <span className="circle-icon">
-                <ArrowDown aria-hidden="true" size={17} />
-              </span>{" "}
-              A few things I’ve made
-            </a>
-            <span className="hero-location">
-              <span className="status-dot" /> Based in the Philippines
-            </span>
-          </div>
-          <div className="hero-rule" />
         </section>
 
         <section id="work" className="work wrap" aria-label="Selected work">
@@ -968,7 +962,9 @@ function App() {
             <article className="project project-hatagi" data-reveal>
               <button
                 className="project-visual hatagi-stage"
-                onClick={(event) => openProject(hatagiProject, event.currentTarget)}
+                onClick={(event) =>
+                  openProject(hatagiProject, event.currentTarget)
+                }
                 aria-label="View Hatagi case study and screenshot"
                 aria-haspopup="dialog"
               >
@@ -1005,7 +1001,9 @@ function App() {
             <article className="project project-yseis" data-reveal>
               <button
                 className="project-visual yseis-stage"
-                onClick={(event) => openProject(yseisProject, event.currentTarget)}
+                onClick={(event) =>
+                  openProject(yseisProject, event.currentTarget)
+                }
                 aria-label="Explore my work as YSES Inventory System Frontend Lead"
                 aria-haspopup="dialog"
               >
@@ -1029,7 +1027,9 @@ function App() {
                 <div>
                   <h3>
                     <button
-                      onClick={(event) => openProject(yseisProject, event.currentTarget)}
+                      onClick={(event) =>
+                        openProject(yseisProject, event.currentTarget)
+                      }
                       aria-haspopup="dialog"
                     >
                       YSES Inventory{" "}
@@ -1156,8 +1156,8 @@ function App() {
                 <span>May—October 2026</span>
                 <ul className="experience-details">
                   <li>
-                    Built TypeScript/JavaScript features for AI workflows,
-                    model inference, and desktop interfaces.
+                    Built TypeScript/JavaScript features for AI workflows, model
+                    inference, and desktop interfaces.
                   </li>
                   <li>
                     Designed three repeatable agent evaluation scenarios and
@@ -1319,7 +1319,9 @@ function App() {
                       <ArrowUpRight aria-hidden="true" size={19} />
                     </h3>
                   </a>
-                  <p>{post.views} views · {post.likes} likes</p>
+                  <p>
+                    {post.views} views · {post.likes} likes
+                  </p>
                 </article>
               ))}
             </div>

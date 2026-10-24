@@ -29,6 +29,7 @@ body {
   margin: 0;
 }
 .portfolio {
+  --section-gap: 150px;
   background: var(--background);
   color: var(--foreground);
 }
@@ -158,12 +159,10 @@ svg {
   margin-left: 20px;
 }
 .hero {
-  min-height: min(820px, calc(100svh - 112px));
   display: flex;
   flex-direction: column;
   position: relative;
   padding-top: 100px;
-  padding-bottom: 30px;
 }
 .hero-main {
   position: relative;
@@ -269,7 +268,7 @@ svg {
   right: 0;
 }
 .work {
-  padding-top: 126px;
+  padding-top: var(--section-gap);
   scroll-margin-top: 60px;
 }
 .section-heading {
@@ -577,7 +576,7 @@ svg {
   transform-origin: left;
 }
 .archive {
-  padding-top: 150px;
+  padding-top: var(--section-gap);
   padding-bottom: 140px;
 }
 .archive-heading {
@@ -1400,9 +1399,6 @@ svg {
   margin-top: 24px;
 }
 @media (min-width: 1600px) {
-  .hero {
-    min-height: 800px;
-  }
   .hero-title {
     font-size: 120px;
   }
@@ -1414,7 +1410,6 @@ svg {
   }
   .hero {
     padding-top: 90px;
-    min-height: 710px;
   }
   .hero-title {
     font-size: 8.2vw;
@@ -1461,7 +1456,6 @@ svg {
     margin-left: 0;
   }
   .hero {
-    min-height: 700px;
     padding-top: 95px;
   }
   .hero-title {
@@ -1473,9 +1467,6 @@ svg {
   }
   .hero-bottom {
     padding-top: 100px;
-  }
-  .work {
-    padding-top: 90px;
   }
   .section-heading {
     display: block;
@@ -1529,8 +1520,10 @@ svg {
     right: 18px;
     bottom: 18px;
   }
+  .portfolio {
+    --section-gap: 100px;
+  }
   .archive {
-    padding-top: 100px;
     padding-bottom: 100px;
   }
   .archive-heading {
@@ -1609,9 +1602,7 @@ svg {
   }
   .hero {
     padding-top: 67px;
-    min-height: calc(100svh - 88px);
     max-height: 820px;
-    padding-bottom: 24px;
   }
   .hero-title {
     font-size: clamp(44px, 10.6vw, 61px);
@@ -1659,9 +1650,6 @@ svg {
     flex-shrink: 0;
     width: 4px;
     height: 4px;
-  }
-  .work {
-    padding-top: 75px;
   }
   .section-heading {
     margin-bottom: 30px;
@@ -1760,8 +1748,10 @@ svg {
     width: 65px;
     flex-shrink: 0;
   }
+  .portfolio {
+    --section-gap: 85px;
+  }
   .archive {
-    padding-top: 85px;
     padding-bottom: 75px;
   }
   .archive-heading {
