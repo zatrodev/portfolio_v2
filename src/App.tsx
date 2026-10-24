@@ -779,13 +779,6 @@ function App() {
         Skip to content
       </a>
       <header className="site-header">
-        <a
-          className="wordmark"
-          href="#"
-          aria-label="Roberto Neil Santos, back to top"
-        >
-          zatro<span>.</span>
-        </a>
         <nav aria-label="Main navigation">
           <a href="#work">Work</a>
           <a href="#about">About</a>
@@ -1448,9 +1441,6 @@ function App() {
         </section>
       </main>
       <footer className="footer wrap">
-        <a className="wordmark" href="#" aria-label="Back to top">
-          zatro<span>.</span>
-        </a>
         <span className="footer-note">
           Made with care. © {new Date().getFullYear()}
         </span>

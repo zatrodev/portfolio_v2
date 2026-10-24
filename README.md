@@ -54,6 +54,7 @@ Kubo color and font references were read from `~/projects/cmsc 128/apps/mobile/s
 - [GSAP ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/): entrance choreography, gentle portrait parallax, and project preview depth.
 - [Lenis](https://lenis.darkroom.engineering/): smooth wheel scrolling and anchor navigation.
 - Plus Jakarta Sans is served locally; its SIL Open Font License is in `public/licenses/Plus-Jakarta-Sans.txt`.
+- Serif accents in the creative section and book-cover titles use locally served Fraunces. The Latin WOFF2 files include optical sizing, regular weights 400–500, and true italic at 400; the SIL Open Font License is in `public/licenses/Fraunces.txt`. Font files come from Google Fonts, with the license from the [Google Fonts Fraunces directory](https://github.com/google/fonts/tree/main/ofl/fraunces).
 
 Local edits do not deploy the site automatically.
 
