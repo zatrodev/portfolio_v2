@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowDown,
+  ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   ArrowUp,
   Check,
@@ -124,34 +126,93 @@ type Project = {
   type: string;
   image?: string;
   href?: string;
+  website?: string;
   description: string;
   stack: string[];
-  gallery?: { src: string; alt: string }[];
+  gallery?: { src: string; alt: string; caption: string }[];
+  caseStudy?: { title: string; text: string }[];
+  results?: { value: string; label: string }[];
   note?: string;
 };
 
 const kuboProject: Project = {
   name: "Kubo",
-  type: "Student housing · React Native",
+  type: "Frontend Lead → CEO · February 2026–present",
+  website: "https://kubo.community",
   image: "/images/kubo-today.webp",
   description:
-    "I started as frontend lead, then became CEO in May 2026. I work with dorm owners and lead the product across student, management, admin, and mobile experiences.",
+    "I lead Kubo across web and mobile, combining frontend development with dorm-owner conversations and product direction.",
   stack: ["React Native", "Expo", "TypeScript", "SvelteKit"],
+  results: [
+    { value: "4,000+", label: "website visits" },
+    { value: "4", label: "product apps" },
+    { value: "7", label: "people on the initial frontend team" },
+  ],
+  caseStudy: [
+    {
+      title: "The problem",
+      text: "Students need clear information before choosing a dorm, while owners need tools to manage inquiries and understand prospective tenants. A housing product has to address both sets of needs.",
+    },
+    {
+      title: "My contribution",
+      text: "I led the initial seven-person frontend team and became CEO in May 2026. I interview and onboard dorm owners, turn feedback into product priorities, and develop TypeScript interfaces across student web, management web, admin, and React Native mobile.",
+    },
+    {
+      title: "A lesson from fieldwork",
+      text: "A dorm owner pointed out that students could review dorms, but owners had no equivalent way to learn about prospective tenants. They proposed tenant reviews. That conversation expanded our focus to trust on both sides of a rental relationship, and tenant reviews are now in development.",
+    },
+    {
+      title: "The result so far",
+      text: "After the website reached 3,000 visits, I shifted the product focus toward mobile. The website has now received over 4,000 visits. I continue to lead development across four apps, alongside owner onboarding, QA, and deployment.",
+    },
+  ],
   gallery: [
     {
       src: "/images/kubo-dorm.webp",
       alt: "Kubo mobile dorm information, with a map, directions, and property photos",
+      caption: "Dorm information",
     },
     {
       src: "/images/kubo-today.webp",
       alt: "Kubo mobile Today screen for reviewing incoming ocular requests",
+      caption: "Today / ocular requests",
     },
     {
       src: "/images/kubo-room-information.webp",
       alt: "Kubo mobile room information sheet showing monthly rent and move-in price breakdown",
+      caption: "Price breakdown",
     },
   ],
   note: "App captures use sample data. The room information sheet was captured from the current component on October 22, 2026; the other screens use earlier app captures.",
+};
+
+const hatagiProject: Project = {
+  name: "Hatagi",
+  type: "Founder & Sole Developer · January 2025–January 2026",
+  website: "https://hatagi.zatro.dev",
+  image: "/images/hatagi-hero.webp",
+  description:
+    "I built a fundraising platform around direct donations, from the Go services and Nuxt interface to payment verification and deployment.",
+  stack: ["Go", "Nuxt", "Docker"],
+  results: [{ value: "90%+", label: "reduction in deployment time" }],
+  caseStudy: [
+    {
+      title: "The problem",
+      text: "Direct-to-bank donations avoid intermediary platform fees, but a fundraising platform still needs a way to check payment receipts. Running the platform also meant working within the limits of a VPS.",
+    },
+    {
+      title: "My contribution",
+      text: "As the sole developer, I built the Go microservices and Nuxt frontend. I added OCR-assisted receipt reconciliation for GCash and Solana payments to pre-validate submissions before manual verification.",
+    },
+    {
+      title: "A key decision",
+      text: "VPS memory crashes made the build-and-deploy process unreliable. I reworked CI/CD around prebuilt artifacts and Git submodules so deployment no longer depended on building everything on the VPS.",
+    },
+    {
+      title: "The result",
+      text: "The revised pipeline prevented the VPS memory crashes and reduced deployment time by more than 90%. I also built an adaptive HLS video pipeline using self-hosted FFmpeg and Cloudflare R2, replacing managed streaming services.",
+    },
+  ],
 };
 
 const yseisProject: Project = {
@@ -303,6 +364,127 @@ function BrowserFrame({
       </div>
       <img src={image} alt={alt} loading="lazy" width="1440" height="900" />
     </div>
+  );
+}
+
+function ProjectActions({
+  item,
+  onOpen,
+}: {
+  item: Project;
+  onOpen: (item: Project, trigger: HTMLButtonElement) => void;
+}) {
+  return (
+    <div className="project-actions">
+      <button
+        className="text-link"
+        aria-haspopup="dialog"
+        aria-label={`View ${item.name} ${item.caseStudy ? "case study" : "project"}`}
+        onClick={(event) => onOpen(item, event.currentTarget)}
+      >
+        {item.caseStudy ? "View case study" : "View project"}
+        <Plus aria-hidden="true" size={16} />
+      </button>
+      {item.website && (
+        <a
+          className="text-link"
+          href={item.website}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Visit website <ArrowUpRight aria-hidden="true" size={16} />
+        </a>
+      )}
+    </div>
+  );
+}
+
+function ProjectGallery({
+  captures,
+}: {
+  captures: NonNullable<Project["gallery"]>;
+}) {
+  const track = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  function moveTo(index: number) {
+    const element = track.current;
+    if (!element) return;
+    const next = Math.max(0, Math.min(captures.length - 1, index));
+    const first = element.children[0] as HTMLElement;
+    const target = element.children[next] as HTMLElement;
+    element.scrollTo({
+      left: target.offsetLeft - first.offsetLeft,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
+  }
+
+  return (
+    <section className="project-screenshots" aria-labelledby="screenshots-title">
+      <div className="gallery-heading">
+        <h3 id="screenshots-title">App screenshots</h3>
+        <div className="gallery-controls">
+          <button
+            aria-label="Previous screenshot"
+            aria-controls="project-screenshots"
+            disabled={active === 0}
+            onClick={() => moveTo(active - 1)}
+          >
+            <ArrowLeft aria-hidden="true" size={20} />
+          </button>
+          <span role="status" aria-live="polite" aria-atomic="true">
+            {active + 1} / {captures.length}
+          </span>
+          <button
+            aria-label="Next screenshot"
+            aria-controls="project-screenshots"
+            disabled={active === captures.length - 1}
+            onClick={() => moveTo(active + 1)}
+          >
+            <ArrowRight aria-hidden="true" size={20} />
+          </button>
+        </div>
+      </div>
+      <div
+        id="project-screenshots"
+        className="dialog-gallery"
+        ref={track}
+        tabIndex={0}
+        aria-label="App screenshots; use left and right arrow keys to browse"
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            moveTo(active + (event.key === "ArrowLeft" ? -1 : 1));
+          }
+        }}
+        onScroll={(event) => {
+          const element = event.currentTarget;
+          const figures = Array.from(element.children) as HTMLElement[];
+          let nearest = 0;
+          const distance = (index: number) =>
+            Math.abs(figures[index].offsetLeft - figures[0].offsetLeft - element.scrollLeft);
+          figures.forEach((_, index) => {
+            if (distance(index) < distance(nearest)) nearest = index;
+          });
+          setActive(nearest);
+        }}
+      >
+        {captures.map((capture) => (
+          <figure key={capture.src}>
+            <img
+              src={capture.src}
+              alt={capture.alt}
+              width="572"
+              height="1270"
+              loading="lazy"
+            />
+            <figcaption>{capture.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -570,6 +752,7 @@ function App() {
     closingModal.current = false;
     modalAnimation.current?.cancel();
     document.body.style.overflow = "";
+    setProject(null);
     lastTrigger.current?.focus();
   }
   async function copyEmail() {
@@ -624,8 +807,9 @@ function App() {
           <div className="hero-intro">
             <span className="intro-dash" />
             <p>
-              I’m Roberto Neil Santos. I build <b>emphatic</b>
-              <br className="desktop-break" /> experiences for web and mobile.
+              I’m Roberto Neil Santos, a <b>full-stack developer</b> building
+              thoughtful web and mobile experiences.
+              <span className="hero-current">Currently leading Kubo.</span>
             </p>
           </div>
           <div className="hero-bottom">
@@ -658,13 +842,22 @@ function App() {
           </div>
 
           <article className="project project-kubo" data-reveal>
+            <div className="project-caption project-introduction">
+              <div>
+                <h3>Kubo</h3>
+                <p>Find home with confidence</p>
+              </div>
+              <span>Frontend Lead → CEO · Web &amp; mobile</span>
+            </div>
+            <ProjectActions item={kuboProject} onOpen={openProject} />
             <div className="kubo-card">
               <button
                 className="project-visual kubo-stage"
                 onClick={(event) =>
                   openProject(kuboProject, event.currentTarget)
                 }
-                aria-label="Explore Kubo mobile screenshots"
+                aria-label="View Kubo case study and screenshots"
+                aria-haspopup="dialog"
               >
                 <div className="kubo-stage-top">
                   <img
@@ -769,31 +962,15 @@ function App() {
                 </div>
               </section>
             </div>
-            <div className="project-caption">
-              <div>
-                <h3>
-                  <a
-                    href="https://kubo.community"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Kubo <ArrowUpRight aria-hidden="true" size={19} />
-                  </a>
-                </h3>
-                <p>Find home with confidence</p>
-              </div>
-              <span>Frontend Lead → CEO · Web & mobile</span>
-            </div>
           </article>
 
           <div className="project-grid">
             <article className="project project-hatagi" data-reveal>
-              <a
+              <button
                 className="project-visual hatagi-stage"
-                href="https://hatagi.zatro.dev"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Visit Hatagi, my fundraising platform"
+                onClick={(event) => openProject(hatagiProject, event.currentTarget)}
+                aria-label="View Hatagi case study and screenshot"
+                aria-haspopup="dialog"
               >
                 <BrowserFrame
                   image="/images/hatagi-hero.webp"
@@ -804,7 +981,7 @@ function App() {
                 <span className="project-open">
                   <ArrowUpRight aria-hidden="true" size={24} />
                 </span>
-              </a>
+              </button>
               <div className="project-caption">
                 <div>
                   <h3>
@@ -823,6 +1000,7 @@ function App() {
                   <TechnologyLabels items={["Go", "Nuxt"]} />
                 </span>
               </div>
+              <ProjectActions item={hatagiProject} onOpen={openProject} />
             </article>
             <article className="project project-yseis" data-reveal>
               <button
@@ -864,6 +1042,7 @@ function App() {
                   Frontend Lead · <TechnologyLabels items={["React"]} />
                 </span>
               </div>
+              <ProjectActions item={yseisProject} onOpen={openProject} />
             </article>
           </div>
 
@@ -906,6 +1085,16 @@ function App() {
               <span className="project-meta">
                 Frontend Lead · <TechnologyLabels items={["SvelteKit"]} />
               </span>
+            </div>
+            <div className="project-actions">
+              <a
+                className="text-link"
+                href="https://expe21ence.yses.org"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit website <ArrowUpRight aria-hidden="true" size={16} />
+              </a>
             </div>
           </article>
           <div className="work-end">
@@ -965,6 +1154,17 @@ function App() {
                 <h3>TenX Development</h3>
                 <p>AI Software Developer Intern</p>
                 <span>May—October 2026</span>
+                <ul className="experience-details">
+                  <li>
+                    Built TypeScript/JavaScript features for AI workflows,
+                    model inference, and desktop interfaces.
+                  </li>
+                  <li>
+                    Designed three repeatable agent evaluation scenarios and
+                    strengthened setup checks for five integrations with
+                    regression tests.
+                  </li>
+                </ul>
               </div>
               <div className="experience-row">
                 <h3>Hatagi</h3>
@@ -1004,6 +1204,15 @@ function App() {
               <span className="about-location" data-reveal>
                 <MapPin aria-hidden="true" size={15} /> Los Baños, Philippines
               </span>
+              <a
+                className="text-link resume-link"
+                href="/roberto-neil-santos-resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View résumé <span className="resume-format">PDF</span>
+                <ArrowUpRight aria-hidden="true" size={17} />
+              </a>
             </div>
           </div>
         </section>
@@ -1294,52 +1503,17 @@ function App() {
         data-lenis-prevent
       >
         <div className="dialog-body">
-          <button
-            className="dialog-close"
-            aria-label="Close project"
-            onClick={closeProject}
-          >
-            <X aria-hidden="true" size={22} />
-          </button>
+          <div className="dialog-toolbar">
+            <button
+              className="dialog-close"
+              aria-label="Close project"
+              onClick={closeProject}
+            >
+              <X aria-hidden="true" size={22} />
+            </button>
+          </div>
           {project && (
             <>
-              {project.gallery ? (
-                <div className="dialog-gallery">
-                  {project.gallery.map((capture) => (
-                    <figure key={capture.src}>
-                      <img
-                        src={capture.src}
-                        alt={capture.alt}
-                        width="572"
-                        height="1270"
-                      />
-                      <figcaption>
-                        {capture.alt.includes("Today")
-                          ? "Today"
-                          : capture.alt.includes("room information sheet")
-                            ? "Price breakdown"
-                            : "Dorm information"}
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
-              ) : project.image ? (
-                <div className="dialog-image">
-                  <img
-                    src={project.image}
-                    alt={`${project.name} application screens`}
-                    width="1920"
-                    height="1080"
-                  />
-                </div>
-              ) : (
-                <div className="code-cover" aria-hidden="true">
-                  <span>HAI 1.2</span>
-                  <span>I HAS A language</span>
-                  <span>VISIBLE "Hello, world!"</span>
-                  <span>KTHXBYE</span>
-                </div>
-              )}
               <div className="dialog-copy">
                 <h2 id="dialog-title">{project.name}</h2>
                 <p>{project.description}</p>
@@ -1347,6 +1521,36 @@ function App() {
                   items={project.stack}
                   className="dialog-stack"
                 />
+                {project.results && (
+                  <dl className="case-study-results">
+                    {project.results.map((result) => (
+                      <div key={result.label}>
+                        <dt>{result.label}</dt>
+                        <dd>{result.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+                {project.caseStudy && (
+                  <div className="case-study-sections">
+                    {project.caseStudy.map((section) => (
+                      <section key={section.title}>
+                        <h3>{section.title}</h3>
+                        <p>{section.text}</p>
+                      </section>
+                    ))}
+                  </div>
+                )}
+                {project.website && (
+                  <a
+                    className="text-link dialog-website"
+                    href={project.website}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Visit website <ArrowUpRight aria-hidden="true" size={17} />
+                  </a>
+                )}
                 {project.href && (
                   <a
                     className="text-link"
@@ -1358,8 +1562,28 @@ function App() {
                     <ArrowUpRight aria-hidden="true" size={17} />
                   </a>
                 )}
-                {project.note && <p className="dialog-note">{project.note}</p>}
               </div>
+              {project.gallery ? (
+                <ProjectGallery key={project.name} captures={project.gallery} />
+              ) : project.image ? (
+                <div className="dialog-image">
+                  <img
+                    src={project.image}
+                    alt={`${project.name} application screen`}
+                    width="1920"
+                    height="1080"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div className="code-cover" aria-hidden="true">
+                  <span>HAI 1.2</span>
+                  <span>I HAS A language</span>
+                  <span>VISIBLE "Hello, world!"</span>
+                  <span>KTHXBYE</span>
+                </div>
+              )}
+              {project.note && <p className="dialog-note">{project.note}</p>}
             </>
           )}
         </div>

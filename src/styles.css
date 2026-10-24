@@ -207,10 +207,15 @@ svg {
   margin-top: 13px;
 }
 .hero-intro p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.85;
   color: var(--muted);
   letter-spacing: -0.15px;
+  max-width: 520px;
+}
+.hero-current {
+  display: block;
+  margin-top: 6px;
 }
 .hero-bottom {
   display: flex;
@@ -1343,12 +1348,10 @@ svg {
   position: relative;
   background: var(--background);
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible;
 }
 .dialog-close {
-  position: absolute;
-  right: 16px;
-  top: 16px;
+  position: relative;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -2528,5 +2531,258 @@ svg {
   }
   .hatagi-stage:hover .hatagi-preview {
     transform: rotate(-5deg);
+  }
+}
+
+/* Clear project actions, readable case studies, and phone-sized controls. */
+.project-introduction {
+  padding-top: 0;
+}
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 12px;
+}
+.project-actions .text-link,
+.resume-link,
+.dialog-website {
+  font-size: 14px;
+  color: var(--primary);
+}
+.project-actions button {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: var(--border);
+}
+.project-kubo > .project-actions {
+  margin-block: 12px 24px;
+}
+.experience-details {
+  margin: 18px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.experience-details li + li {
+  margin-top: 10px;
+}
+.resume-link {
+  margin-top: 20px;
+  border-bottom: 1px solid var(--primary);
+}
+.resume-format {
+  font-size: 11px;
+  color: var(--muted);
+}
+.dialog-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 16px;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+.dialog-copy {
+  padding: 28px 40px 32px;
+}
+.dialog-copy > p {
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: none;
+}
+.dialog-stack {
+  font-size: 13px;
+  margin-top: 20px;
+}
+.case-study-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px 36px;
+  padding-block: 24px;
+  margin: 28px 0;
+  border-block: 1px solid var(--border);
+}
+.case-study-results > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 160px;
+  gap: 6px;
+}
+.case-study-results dt {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.case-study-results dd {
+  order: -1;
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+.case-study-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+.case-study-sections h3,
+.gallery-heading h3 {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.case-study-sections p {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.dialog-website {
+  margin-top: 24px;
+}
+.gallery-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px 25px 0;
+  background: #e9dfd5;
+}
+.dialog-gallery {
+  position: relative;
+  padding: 24px 25px;
+}
+.dialog-gallery figcaption {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.dialog-gallery:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -4px;
+}
+.gallery-controls {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+.gallery-controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--background);
+}
+.gallery-controls button:disabled {
+  opacity: 0.4;
+}
+.gallery-controls button:not(:disabled):hover {
+  color: var(--on-primary);
+  background: var(--primary);
+}
+.dialog-note {
+  margin: 0;
+  padding: 24px 40px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 800px) {
+  .hero-intro p,
+  .about-content > div > p {
+    font-size: 16px;
+  }
+  .project-caption p {
+    font-size: 14px;
+  }
+  .project-caption > span,
+  .experience-row p,
+  .about-capabilities {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .experience-row > span,
+  .about-location,
+  .kubo-fieldwork-grid figcaption {
+    font-size: 12px;
+  }
+  .kubo-fieldwork-heading p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .case-study-sections {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 580px) {
+  .site-header nav {
+    font-size: 13px;
+    gap: 8px;
+  }
+  .site-header nav > a {
+    min-width: 44px;
+    padding-inline: 4px;
+    justify-content: center;
+  }
+  .hero-bottom {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+  .scroll-link {
+    font-size: 12px;
+    min-height: 44px;
+  }
+  .hero-location {
+    font-size: 11px;
+    max-width: none;
+    padding-bottom: 0;
+  }
+  .intro-dash {
+    margin-top: 14px;
+  }
+  .project-actions {
+    gap: 8px 20px;
+  }
+  .project-caption > span {
+    white-space: normal;
+  }
+  .dialog-copy {
+    padding: 24px;
+  }
+  .case-study-results > div {
+    flex-basis: 100%;
+  }
+  .case-study-results {
+    gap: 20px;
+  }
+  .case-study-results dd {
+    font-size: 30px;
+  }
+  .gallery-controls {
+    display: flex;
+  }
+  .dialog-gallery {
+    gap: 24px;
+    scroll-padding-inline: 25px;
+  }
+  .dialog-gallery figure {
+    flex-basis: 100%;
+    scroll-snap-align: start;
+  }
+  .dialog-gallery img {
+    width: min(100%, 280px);
+    margin-inline: auto;
+  }
+  .dialog-note {
+    padding: 24px;
   }
 }

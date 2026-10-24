@@ -38,7 +38,11 @@ Kubo's gallery uses actual mobile captures with sample data:
 - Today / ocular requests: October 21, 2026, from `cmsc 128/output/kubo-visit-scheduling-2026-10-21/references/owner-today-ocular-request.png`.
 - Room information sheet: October 22, 2026. A fresh isolated Android capture of the production `dorm-room-information-sheet.tsx`, with its price breakdown and sample room data. Source PNG, UIAutomator XML, fixture, and component hash are in `/home/zatro/.codex/visualizations/2026/10/21/01a15f0b-2cfc-7993-95dd-68b898350776/kubo-room-information/`.
 
-These captures show the app with sample data; they are not a new live-backend verification. On mobile, the project gallery scrolls horizontally so each full screen remains readable.
+These captures show the app with sample data; they are not a new live-backend verification. On mobile, the project gallery scrolls horizontally with previous/next controls, an image counter, swipe support, and left/right keyboard navigation. Project context appears before screenshots, and the close control stays visible while the dialog scrolls.
+
+Kubo and Hatagi have concise case studies covering the problem, individual contribution, a product or engineering decision, and results. On October 24, 2026, Robbie confirmed Kubo has over 4,000 website visits and Hatagi's deployment-time improvement exceeds 90%. Kubo's owner-feedback example comes directly from Robbie: an owner requested tenant reviews to complement students' ability to review dorms; this feature is in development. Team size, four-app scope, the earlier move toward mobile after 3,000 visits, Hatagi's OCR-assisted receipt checks and deployment approach, and TenX contributions come from the existing résumé. Visits are described as visits, not unique users or active customers.
+
+The About section links to `public/roberto-neil-santos-resume.pdf`, an unchanged copy of the supplied résumé, including the contact number. Update that file when the résumé changes. The hero and page metadata explicitly identify Robbie as a full-stack developer. Mobile introductory, About, and case-study body text uses 16px; navigation uses 13px text and minimum 44px touch targets.
 
 The Kubo card also includes four user-confirmed behind-the-scenes photos: the laptop-work photo from `cmsc 128/output/kubo-ichec-acknowledgment-2026-10-22/revision-2/references/setup.png`, and three photos supplied on October 24, 2026 (a conversation at a laptop, a property walkthrough, and an office demo). The dorm-photography image was excluded at the user's direction. Local WebP copies preserve the full compositions; card thumbnails link to those full photos. The photo and reel strip scrolls horizontally on smaller screens.
 
@@ -51,4 +55,4 @@ Kubo color and font references were read from `~/projects/cmsc 128/apps/mobile/s
 - [Lenis](https://lenis.darkroom.engineering/): smooth wheel scrolling and anchor navigation.
 - Plus Jakarta Sans is served locally; its SIL Open Font License is in `public/licenses/Plus-Jakarta-Sans.txt`.
 
-This is a local project. No hosted deployment has been created.
+Local edits do not deploy the site automatically.
