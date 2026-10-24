@@ -56,3 +56,10 @@ Kubo color and font references were read from `~/projects/cmsc 128/apps/mobile/s
 - Plus Jakarta Sans is served locally; its SIL Open Font License is in `public/licenses/Plus-Jakarta-Sans.txt`.
 
 Local edits do not deploy the site automatically.
+
+## Link previews
+
+Open Graph and large-image card metadata live in `index.html`. Both reference
+`public/images/og-hero.jpg`, a 1200 × 630 screenshot of the live desktop hero
+captured on October 24, 2026, after its entrance animations settled. Recapture
+the image when the hero changes; it is a static image rather than a live render.
