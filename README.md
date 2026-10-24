@@ -24,6 +24,8 @@ Book titles and authors were checked against [Robert Cialdini’s Influence page
 
 ## Content and references
 
+Featured TikTok cards show static view and like counts checked on October 24, 2026: cookies (45.4K views, 3,769 likes), HTTPS (28.6K views, 2,314 likes), and scam links (991.1K views, 95.6K likes). Views were read from the public profile grid and likes from each video. These counts do not refresh automatically.
+
 The primary content source is the latest résumé, `~/Documents/Resumes & Career/Roberto Neil Santos - Resume.pdf` (October 15, 2026). The selected projects are Kubo, Hatagi, YSES Inventory, and YSES Week, with the role stated for each. The earlier KainWell and Beehive work is supported by the prior portfolio and résumé. LOLCode is backed by the Rust workspace at `~/study/rust/lolcode` (lexer, parser, interpreter, and Iced GUI). Its cover is an illustrative code excerpt, not an application screenshot. Professional experience uses the current résumé's Kubo, TenX, and Hatagi entries.
 
 The hero portrait comes from Hatagi's local personal assets. Hatagi's hero image is a capture of `https://hatagi.zatro.dev/` taken October 24, 2026; YSES Inventory uses its local dashboard screenshot. YSES Week uses a capture of `https://expe21ence.yses.org/`.

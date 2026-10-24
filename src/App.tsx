@@ -71,20 +71,22 @@ const kuboPhotos = [
 const creatorPosts = [
   {
     title: "Cookies, minus the confusion.",
-    description: "What websites remember about you, and why it matters.",
+    views: "45.4K",
+    likes: "3,769",
     image: "/images/tiktok-cookies.webp",
     href: "https://www.tiktok.com/@zatrodev/video/7683847978607693076",
   },
   {
     title: "The padlock isn’t the whole story.",
-    description:
-      "An encrypted connection doesn’t always mean a trustworthy website.",
+    views: "28.6K",
+    likes: "2,314",
     image: "/images/tiktok-https.webp",
     href: "https://www.tiktok.com/@zatrodev/video/7680515693883772180",
   },
   {
     title: "Spotting a scam link.",
-    description: "A closer look at domains before you open that link.",
+    views: "991.1K",
+    likes: "95.6K",
     image: "/images/tiktok-scam-links.webp",
     href: "https://www.tiktok.com/@zatrodev/video/7678613615842315541",
   },
@@ -1108,7 +1110,7 @@ function App() {
                       <ArrowUpRight aria-hidden="true" size={19} />
                     </h3>
                   </a>
-                  <p>{post.description}</p>
+                  <p>{post.views} views · {post.likes} likes</p>
                 </article>
               ))}
             </div>
